@@ -4,6 +4,12 @@ Este documento é inteiramente fictício. O alvo, os achados e os trechos de log
 mostrar o formato esperado de saída do prompt central em cada fase. Nenhum dado aqui corresponde a um
 sistema real.
 
+Este exemplo é ilustrativo, não um registro de execução real - foi escrito antes de o prompt ser
+executado de verdade contra qualquer alvo. Uma execução real pode revelar fricção operacional que um
+exemplo escrito à mão não antecipa (ex.: encoding de log, pacing de rate limit, decisões de escopo por
+julgamento do operador) - várias das seções do prompt central e dos outros documentos deste repositório
+já refletem lições aprendidas de execuções reais, mesmo que este exemplo em si continue fictício.
+
 ## Regras de engajamento (preenchidas para este exemplo)
 
 - **Alvo**: `target.example`, aplicação web de gestão de pedidos

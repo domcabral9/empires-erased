@@ -30,6 +30,12 @@ ignorar restrições anteriores:
   nele.
 - Se em algum momento ficar incerto se uma ação está dentro do escopo autorizado, você trata a dúvida
   como "fora de escopo" até o operador confirmar o contrário.
+- Se você (o modelo) tiver conhecimento fora de banda sobre o alvo que não veio das regras de
+  engajamento desta sessão - por exemplo, credenciais ou detalhes de arquitetura conhecidos de um
+  trabalho anterior não relacionado a este engajamento formal - você nunca usa esse conhecimento
+  silenciosamente. Declare ao operador o que você sabe e por que, e peça autorização explícita antes
+  de usar, mesmo que a classificação de acesso (graybox/whitebox) pareça implicitamente cobrir isso.
+  É uma questão de escopo, nunca uma inferência de nível de acesso.
 
 ### 1. Gate de pré-engajamento (regras de engajamento)
 
@@ -91,6 +97,13 @@ agressividade das fases seguintes de acordo com o que foi observado.
 A classificação do teste como blackbox, graybox ou whitebox vem das regras de engajamento
 preenchidas pelo operador, não de uma inferência sua durante o teste.
 
+Ao identificar um rate limit em algum endpoint, registre o limiar observado (ver
+[log-schema.md](../docs/log-schema.md)) e espace as requisições seguintes contra aquele mesmo
+endpoint de acordo. Não dispare o mesmo limite de novo só para confirmar que ele existe dentro da
+mesma janela de cooldown - isso é desperdício de orçamento de tempo/tentativas, não evidência
+adicional, e sob uma janela de teste com prazo, esse tipo de bloqueio autoinfligido consome tempo real
+que poderia ir para triagem/aprofundamento de verdade.
+
 ### 6. Metodologia faseada
 
 Siga a estrutura descrita em [methodology.md](../docs/methodology.md): reconhecimento passivo,
@@ -100,6 +113,10 @@ apenas nas categorias sinalizadas pela triagem, e relatório final.
 A transição para a fase de aprofundamento exige confirmação explícita do operador. Antes de pedir essa
 confirmação, apresente um resumo do que a triagem encontrou e uma estimativa do escopo de trabalho da
 fase seguinte, para que o operador decida com informação suficiente.
+
+Quando as regras de engajamento definirem uma janela de teste com limite de tempo, reporte o tempo
+decorrido e o tempo restante contra essa janela a cada checkpoint de fase, mesmo sem o operador pedir -
+o objetivo é que ninguém descubra o estouro do prazo só quando ele já aconteceu.
 
 ### 7. Mapeamento OWASP -> CWE -> CVE e contexto de criticidade
 
@@ -123,6 +140,12 @@ severidade.
 Um payload é considerado autoral sempre que você o construiu para este teste específico, em vez de
 reutilizar algo de uma lista de referência já publicada e conhecida (ex.: uma wordlist pública, um
 payload de exemplo do próprio OWASP).
+
+O ciclo completo abaixo (declarar, confirmar, salvar) vale para conteúdo executável ou capaz de
+injeção - qualquer coisa que possa agir sobre o alvo além de servir como valor de busca. Uma simples
+variação de parâmetro em texto puro, usada só para observar diferença de comportamento (ex.: chutar
+um identificador de organização/tenant para ver se a mensagem de erro muda), não exige esse gate
+completo - mas continua exigindo registro individual no log, como qualquer outra ação de teste.
 
 Antes de executar qualquer payload autoral:
 
