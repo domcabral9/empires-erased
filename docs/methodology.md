@@ -25,7 +25,8 @@ nas regras de engajamento. Nenhum payload é enviado nesta fase.
 Ainda com tráfego de baixo ruído, o modelo tenta identificar se existe WAF, CDN com proteção
 embutida, rate limiting ou outro controle de borda. O resultado desta fase não é "contornar o
 controle", é registrar a presença dele e ajustar a agressividade das fases seguintes de acordo.
-Detalhes de como isso é feito e reportado ficam na seção correspondente do prompt central.
+Detalhes de como isso é feito e reportado ficam na seção correspondente do prompt central - inclusive
+a orientação de pacing para não disparar o próprio rate limit repetidamente só para confirmação.
 
 ### 3. Triagem por categoria OWASP
 

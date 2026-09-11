@@ -25,6 +25,37 @@ JSON Lines (um objeto JSON por linha), no diretório validado durante o [gate de
 {"timestamp":"2026-09-11T14:32:07-03:00","phase":"triagem-owasp","owasp_category":"A03:2021","action":"teste de injeção refletida em parâmetro de busca","target":"https://target.example/search?q=","access_model":"blackbox","custom_payload":false,"payload_ref":null,"result_summary":"payload refletido sem encoding, indício de XSS refletido","evidence_hash":"9f2c...a41d","operator_confirmed":true}
 ```
 
+## Geração segura de linhas JSONL
+
+Nunca construa uma linha de log concatenando string à mão (ex.: um heredoc de shell escapando aspas
+manualmente). Sempre serialize cada registro com um serializador JSON real disponível no ambiente do
+operador (`JSON.stringify` em JavaScript/Node, `json.dumps` em Python, etc.) e escreva o resultado no
+arquivo. O gatilho mais comum de JSONL inválido é caminho de arquivo no Windows (barra invertida) em
+campos como `payload_ref`, `action` ou `target` - ou serialize o valor programaticamente, ou normalize
+para barra normal (`/`) antes de escrever.
+
+Exemplo ruim (escaping manual, quebra com barra invertida não escapada):
+
+```
+echo '{"payload_ref":"D:\Artifacts\run\evidence.md"}' >> log.jsonl
+```
+
+Exemplo correto (serializador real produz o escaping certo sozinho):
+
+```js
+const fs = require("fs");
+const entry = { payload_ref: "D:\\Artifacts\\run\\evidence.md" /* ...demais campos */ };
+fs.appendFileSync("log.jsonl", JSON.stringify(entry) + "\n");
+```
+
+Depois de escrever, valide o arquivo inteiro (`JSON.parse` linha a linha, ou equivalente) antes de
+seguir para a próxima fase - uma linha inválida não detectada compromete a rastreabilidade de todo o
+engajamento.
+
+Um bloqueio por rate limit encontrado durante o teste (ver a orientação de pacing no
+[prompt central](../prompt/core-prompt.md)) também vira uma linha de log normal, com
+`result_summary` descrevendo o bloqueio - não é só tratado operacionalmente sem deixar rastro.
+
 ## Regras de redação
 
 - Nunca gravar credencial, token de sessão, ou dado pessoal identificável em texto puro em nenhum

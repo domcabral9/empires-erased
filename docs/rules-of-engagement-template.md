@@ -38,12 +38,18 @@ logs do engajamento, fora do controle de versão se contiver qualquer dado real.
   não vindo de wordlist conhecida, qualquer ação que altere dado real):
 - **Testes proibidos mesmo com autorização de escopo geral** (ex.: exfiltração de dado real além do
   mínimo necessário para prova de conceito, força bruta de credencial real):
+- **Cadência de confirmação exigida**: por fase (checkpoint a cada transição da
+  [metodologia](methodology.md)) / por ação (confirmação a cada teste ativo individual) / só antes do
+  deep-dive (padrão do prompt central, sem checkpoint adicional nas fases anteriores):
 
 ## Ambiente de execução
 
 - **Diretório de log validado e gravável**:
 - **Diretório isolado para artefatos/payloads gerados durante o teste**:
 - **Sistema operacional/shell do operador** (Linux, Windows, contêiner):
+
+Este template preenchido e o relatório final ficam no diretório de log. Só evidência gerada durante o
+teste (payload salvo, captura de resposta, etc.) vai para o diretório de artefatos.
 
 ## Assinatura
 
