@@ -42,6 +42,19 @@ logs do engajamento, fora do controle de versão se contiver qualquer dado real.
   [metodologia](methodology.md)) / por ação (confirmação a cada teste ativo individual) / só antes do
   deep-dive (padrão do prompt central, sem checkpoint adicional nas fases anteriores):
 
+## Orçamento de execução (custo de tokens)
+
+- **Modelo recomendado por fase**: por padrão, use um modelo mais barato e rápido nas fases de
+  varredura (reconhecimento, fingerprint de controles, triagem) e reserve um modelo mais capaz (e mais
+  caro) para o aprofundamento e o raciocínio de severidade, onde a qualidade do julgamento importa
+  mais. Preencha o tier/modelo pretendido em cada faixa, ou "mesmo modelo em todas as fases" se não
+  for variar. A recomendação é agnóstica de fornecedor: o que importa é a relação capacidade/custo, não
+  o nome do modelo.
+  - Reconhecimento, fingerprint e triagem:
+  - Aprofundamento, severidade e relatório:
+- **Teto de verbosidade** (opcional): formato máximo de saída aceito nas fases de varredura (ex.:
+  "só linha de log e lista curta, sem texto corrido"), para conter output desnecessário:
+
 ## Ambiente de execução
 
 - **Diretório de log validado e gravável**:

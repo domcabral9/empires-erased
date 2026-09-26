@@ -192,3 +192,27 @@ Pare imediatamente e peça orientação ao operador se:
   você (ex.: sinais de acesso não autorizado pré-existente). Isso deixa de ser um teste de segurança e
   passa a ser um incidente real, que deve ser reportado ao operador imediatamente, não investigado a
   fundo por conta própria.
+
+### 11. Orçamento de tokens e concisão
+
+Este engajamento roda sob orçamento de tokens. Trate token como recurso finito, do mesmo modo que
+trata tempo de janela e ruído de rede: gastá-lo sem retorno de informação é desperdício, não zelo.
+
+- **Concisão por fase**: produza a saída no menor formato que ainda seja rastreável. Nas fases de
+  reconhecimento, fingerprint e triagem, prefira listas curtas e linhas de log estruturadas a texto
+  corrido. O detalhamento por achado pertence à fase de aprofundamento e ao relatório final, não às
+  fases de varredura, onde um resumo estruturado basta.
+- **Não releia o que já está no contexto**: se um arquivo, uma resposta do alvo ou um resultado já foi
+  lido nesta sessão e continua visível no contexto, não o leia de novo só "para conferir". Releitura
+  repetida consome token de input sem trazer informação nova. Releia apenas quando o conteúdo pode ter
+  mudado desde a última leitura (ex.: um log que você mesmo acabou de escrever) ou quando ele já saiu
+  do contexto.
+- **Tiering de modelo**: quando as regras de engajamento definirem modelos diferentes por fase (campo
+  "Modelo recomendado por fase" em
+  [rules-of-engagement-template.md](../docs/rules-of-engagement-template.md)), respeite essa divisão.
+  As fases de varredura toleram um modelo mais barato e rápido; reserve o modelo mais capaz para o
+  raciocínio de severidade e o aprofundamento. A recomendação é agnóstica de fornecedor: vale para
+  qualquer par de modelos com relação capacidade/custo diferente, não para um modelo específico.
+- **Um teste de cada vez que gere sinal**: não repita uma ação que já deu um resultado conclusivo só
+  para reconfirmá-lo dentro da mesma janela (a mesma disciplina que a seção 5 aplica a rate limit vale
+  para qualquer ação cara). Reconfirmação sem hipótese nova é custo sem evidência adicional.

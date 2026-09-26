@@ -59,6 +59,21 @@ operador antes de começar, não inferida ad hoc pelo modelo durante o teste:
   leitura direta de código, o que muda a natureza da evidência (achado por análise estática, não só
   por comportamento observado em tempo de execução) e deve ser registrado como tal no relatório.
 
+## Tiering de modelo como decisão de custo
+
+O mesmo raciocínio que justifica as fases (não gastar esforço caro onde não há sinal) vale para a
+escolha de modelo. As fases de varredura (reconhecimento, fingerprint, triagem) são, em sua maior
+parte, coleta e comparação de sinais de baixa ambiguidade: toleram um modelo mais barato e rápido. O
+aprofundamento e o raciocínio de severidade são onde o julgamento fino importa, e onde um modelo mais
+capaz se paga. Separar os dois é a forma mais direta de reduzir o custo de um engajamento sem perder
+qualidade no que de fato exige qualidade.
+
+Isso fica registrado no campo "Modelo recomendado por fase" das
+[regras de engajamento](rules-of-engagement-template.md) e é reforçado como orientação de execução no
+prompt central. A recomendação é agnóstica de fornecedor: o critério é a relação capacidade/custo entre
+os modelos disponíveis, não o nome de nenhum deles. Um operador que só tenha um modelo à disposição
+segue com ele em todas as fases, e a economia vem então só da concisão de output e do gate entre fases.
+
 ## Maturidade do ambiente como fator de risco
 
 Um ambiente em decisão de custo (hospedagem barata, sem WAF, banco e storage recém-configurados) tem
