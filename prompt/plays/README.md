@@ -29,15 +29,15 @@ nas regras de engajamento.
 | Categoria OWASP Top 10:2021 | Play | Estado |
 |---|---|---|
 | A01: Broken Access Control | [a01-broken-access-control.md](a01-broken-access-control.md) | Disponível |
-| A02: Cryptographic Failures | a02-cryptographic-failures.md | Planejada |
+| A02: Cryptographic Failures | [a02-cryptographic-failures.md](a02-cryptographic-failures.md) | Disponível |
 | A03: Injection | [a03-injection.md](a03-injection.md) | Disponível |
-| A04: Insecure Design | a04-insecure-design.md | Planejada |
-| A05: Security Misconfiguration | a05-security-misconfiguration.md | Planejada |
-| A06: Vulnerable and Outdated Components | a06-vulnerable-components.md | Planejada |
-| A07: Identification and Authentication Failures | a07-auth-failures.md | Planejada |
-| A08: Software and Data Integrity Failures | a08-integrity-failures.md | Planejada |
-| A09: Security Logging and Monitoring Failures | a09-logging-failures.md | Planejada |
-| A10: Server-Side Request Forgery (SSRF) | a10-ssrf.md | Planejada |
+| A04: Insecure Design | [a04-insecure-design.md](a04-insecure-design.md) | Disponível |
+| A05: Security Misconfiguration | [a05-security-misconfiguration.md](a05-security-misconfiguration.md) | Disponível |
+| A06: Vulnerable and Outdated Components | [a06-vulnerable-components.md](a06-vulnerable-components.md) | Disponível |
+| A07: Identification and Authentication Failures | [a07-auth-failures.md](a07-auth-failures.md) | Disponível |
+| A08: Software and Data Integrity Failures | [a08-integrity-failures.md](a08-integrity-failures.md) | Disponível |
+| A09: Security Logging and Monitoring Failures | [a09-logging-failures.md](a09-logging-failures.md) | Disponível |
+| A10: Server-Side Request Forgery (SSRF) | [a10-ssrf.md](a10-ssrf.md) | Disponível |
 
 Antes de usar este índice num engajamento real, confirme em owasp.org se já há uma revisão do Top 10
 mais recente que a de 2021 (mesma ressalva da tabela de referência).
