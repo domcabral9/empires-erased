@@ -64,11 +64,14 @@ início.
 ## Estrutura do repositório
 
 ```
-prompt/core-prompt.md              instrução central, agnóstica de LLM e de plataforma
+prompt/core-prompt.md              núcleo: instrução central, agnóstica de LLM e de plataforma
+prompt/plays/                      plays por categoria OWASP, carregadas sob demanda (ver plays/README.md)
 docs/rules-of-engagement-template.md  template a preencher antes de qualquer teste
 docs/methodology.md                explicação da metodologia faseada e dos gates
 docs/owasp-cwe-cve-reference.md    tabela estática OWASP -> CWE -> CVE
 docs/log-schema.md                 esquema do log estruturado de execução
+docs/finding-template.md           template formal de achado (com campo de confiança)
+docs/report-template.md            template do relatório final consolidado
 examples/synthetic-run.md          engajamento completo, alvo fictício
 ```
 

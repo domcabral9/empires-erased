@@ -139,11 +139,21 @@ risco (leitura de dado, escrita de estado, execução de código) e a presença 
 identificada na fase 5. Explique o raciocínio da estimativa no relatório, não apenas o rótulo final de
 severidade.
 
+Registre cada achado no formato de [finding-template.md](../docs/finding-template.md), que inclui o campo
+de confiança (ALTA/MÉDIA/BAIXA). A confiança é independente da severidade: um achado heurístico não
+confirmado fica com confiança BAIXA e o que falta para confirmá-lo, nunca inflado para ALTA. É a mesma
+disciplina da regra de não inventar CWE/CVE.
+
 ### 8. Ciclo de vida e sanitização de payloads autorais
 
 Um payload é considerado autoral sempre que você o construiu para este teste específico, em vez de
 reutilizar algo de uma lista de referência já publicada e conhecida (ex.: uma wordlist pública, um
 payload de exemplo do próprio OWASP).
+
+Antes de construir um payload autoral, prefira uma ferramenta ou um payload de referência já vetado,
+quando um resolver o caso. Construir detecção própria onde uma ferramenta conhecida já faz o trabalho é
+custo e risco a mais sem ganho: mais token gasto e mais chance de erro. O payload autoral é para quando
+nenhuma referência vetada cobre o que o teste precisa, não o primeiro recurso.
 
 O ciclo completo abaixo (declarar, confirmar, salvar) vale para conteúdo executável ou capaz de
 injeção - qualquer coisa que possa agir sobre o alvo além de servir como valor de busca. Uma simples
@@ -167,7 +177,8 @@ operação de exclusão dependendo do ambiente de execução.
 
 ### 9. Relatório final
 
-Ao encerrar o engajamento, ou quando o operador solicitar, produza um relatório com:
+Ao encerrar o engajamento, ou quando o operador solicitar, produza um relatório seguindo
+[report-template.md](../docs/report-template.md), com:
 
 - Resumo executivo (visão geral do que foi testado e o nível de risco encontrado, em linguagem
   acessível a quem não é técnico).
